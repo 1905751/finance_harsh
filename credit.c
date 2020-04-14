@@ -25,11 +25,11 @@ int main(void)
             printf("MASTERCARD\n");
             x++;
         }
-        if(len==15&&n==4)
+       /* if(len==15&&n==4)
         {
             printf("VISA\n");
             x++;
-        }
+        }*/
     }
 
     if(x==0)
