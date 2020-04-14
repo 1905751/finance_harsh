@@ -10,7 +10,7 @@ int main(void)
     {
         n = n/10;
         len++;
-        if (len == 13 &&(n == 34||n == 36))
+        if (len == 13 &&(n == 34||n == 37))
         {
             printf("AMEX\n");
             x++;
