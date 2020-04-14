@@ -1,49 +1,49 @@
 #include <stdio.h>
 #include <cs50.h>
 
-long luhn(long,long);
+long luhn(long, long);
 
 int main(void)
 {
-    long len=0,x=0,c,n;
+    long len = 0, x = 0, c, n;
     long number = get_long("Number: ");
-    n=number;
+    n = number;
 
     while (n != 0)
     {
-        n = n/10;
+        n = n / 10;
         len++;
-        if (len == 13 &&(n == 34||n == 37))
+        if (len == 13 && (n == 34 || n == 37))
         {
-            c=luhn(15,number);
-            if(c%10==0)
+            c = luhn(15, number);
+            if (c % 10 == 0)
             {
                 printf("AMEX\n");
                 x++;
             }
         }
-        if ( len == 12 && n == 4)
+        if (len == 12 && n == 4)
         {
-            c=luhn(13,number);
-            if(c%10==0)
+            c = luhn(13, number);
+            if(c % 10 == 0)
             {
                 printf("VISA\n");
                 x++;
             }
         }
-        if(len==14&&(n>=51&&n<=55))
+        if (len == 14 && (n >= 51 && n <= 55))
         {
-            c=luhn(16,number);
-            if(c%10==0)
+            c = luhn(16, number);
+            if (c % 10 == 0)
             {
                 printf("MASTERCARD\n");
                 x++;
             }
         }
-        if(len==15&&n==4)
+        if (len == 15 && n == 4)
         {
-            c=luhn(16,number);
-            if(c%10==0)
+            c = luhn(16, number);
+            if (c % 10 == 0)
             {
                 printf("VISA\n");
                 x++;
@@ -51,7 +51,7 @@ int main(void)
         }
     }
 
-    if(x==0)
+    if (x == 0)
     {
         printf("INVALID\n");
     }
@@ -59,28 +59,28 @@ int main(void)
 }
 
 
-long luhn(long b,long num)
+long luhn(long b, long num)
 {
-    long i,s=0,y=0;
-    for(i=0;i<b;i++)
+    long i, s = 0, y = 0;
+    for(i = 0; i < b; i++)
     {
-        if(i%2==0)
+        if (i % 2 == 0)
         {
-            s=s+num%10;
-            num=num/10;
+            s = s + num % 10;
+            num = num / 10;
         }
         else
         {
-            if(2*(num%10)>9)
+            if (2 * (num % 10) > 9)
             {
-                y=2*(num%10);
-                s=s+(y%10)+(y/10);
-                num=num/10;
+                y = 2 * (num % 10);
+                s = s + (y % 10) + (y / 10);
+                num = num / 10;
             }
             else
             {
-                s=s+2*(num%10);
-                num=num/10;
+                s = s + 2 * (num % 10);
+                num = num / 10;
             }
         }
     }
