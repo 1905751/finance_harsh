@@ -28,7 +28,7 @@ int main(void)
 
         printf("  ");       // to print thr gap btwn to pyramids
 
-        for (j = 0;j <= i; j++) //to print the right pyramid
+        for (j = 0; j <= i; j++) //to print the right pyramid
         {
             printf("#");
         }
