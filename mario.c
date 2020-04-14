@@ -10,7 +10,7 @@ int main(void)
     {
         height = get_int("enter the height\n");     // asking height from the user
     }
-    while(height<0);
+    while(height<1);
 
     for(i=0;i<height;i++)       // loop to change the line
     {
