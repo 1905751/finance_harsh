@@ -81,8 +81,7 @@ int main(int argc, string argv[])
 
 int rev(string key)
 {
-    int i,k;
-    int hash[26];
+    int i, j, k;
     for (i = 0; key[i] != '\0'; i++)
     {
         k = (int) key[i];
@@ -92,10 +91,15 @@ int rev(string key)
         k = k - 97;
         else
         return 1;
-        if (hash[k] == 0)
-        hash[k]++;
-        else if (hash[k] == 1)
-        return 1;
+        
+        
+        for (j = i+1; key[j] != '\0'; i++)
+        {
+            if(key[i] == key[j])
+            {
+                return 1;
+            }
+        }
     }
 
     return 0;
