@@ -69,9 +69,11 @@ int main(int argc, string argv[])
 
        }
        printf("\n");
+       return 0;
 
     }
-
+        printf("no key");
+        return 1;
 }
 
 
