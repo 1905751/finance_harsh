@@ -40,7 +40,7 @@ int main(int argc, string argv[])
            if (x >= 65 && x <= 90)
            {
                x = x - 65;
-               if (str[i] >= 65 && str[i] <= 90)
+               if (str[x] >= 65 && str[x] <= 90)
                {
                    printf("%c",str[x]);
                }
@@ -52,7 +52,7 @@ int main(int argc, string argv[])
            else if (x >= 97 && x <= 122)
            {
                x = x - 97;
-               if (str[i] >= 97 && str[i] <= 122)
+               if (str[x] >= 97 && str[x] <= 122)
                {
                    printf("%c",str[x]);
                }
