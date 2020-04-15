@@ -23,7 +23,7 @@ int main(void)
         }
         
         //for word calculation
-        if (text[i] == ' ' || text[i+1] == '\0')
+        if (text[i] == ' ' || text[i + 1] == '\0')
         {
             w++;
         }
@@ -52,10 +52,13 @@ int main(void)
     }
     else
     {
-        if ((int) (index+0.5)> (int) index)
-         printf("Grade %d\n", (int) index + 1);
+        if ((int)(index + 0.5) > (int) index)
+        {
+            printf("Grade %d\n", (int) index + 1);
+        }
         else
-        printf("Grade %d\n", (int) index);
+        {
+            printf("Grade %d\n", (int) index);
+        }
     }
-    
 }
