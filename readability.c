@@ -42,9 +42,20 @@ int main(void)
     //index calculation
     index = 0.0588 * l - 0.296 * s - 15.8 ;
     
-    if ((int) (index+0.5)> (int) index)
-    printf("Grade %d", (int) index + 1);
+    if(index<1)
+    {
+        printf("Before Grade 1\n");
+    }
+    else if(index>=16)
+    {
+        printf("Grade 16+\n");
+    }
     else
-    printf("Grade %d", (int) index);
+    {
+         if ((int) (index+0.5)> (int) index)
+         printf("Grade %d\n", (int) index + 1);
+        else
+        printf("Grade %d\n ", (int) index);
+    }
 
 }
