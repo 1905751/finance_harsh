@@ -93,7 +93,7 @@ int rev(string key)
         return 1;
         
         
-        for (j = i+1; key[j] != '\0'; i++)
+        for (j = i+1; key[j] != '\0'; j++)
         {
             if(key[i] == key[j])
             {
