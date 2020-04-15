@@ -29,7 +29,7 @@ int main(void)
         }
         
         //for sentence calculation
-        if (text[i] == '.' || text[i] == '!')
+        if (text[i] == '.' || text[i] == '!' || text[i] == '?')
         {
             s++;
         }
