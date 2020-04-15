@@ -55,7 +55,7 @@ int main(void)
         if ((int) (index+0.5)> (int) index)
          printf("Grade %d\n", (int) index + 1);
         else
-        printf("Grade %d\n ", (int) index);
+        printf("Grade %d\n", (int) index);
     }
     
 }
