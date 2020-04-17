@@ -16,6 +16,7 @@ typedef struct
 {
     int winner;
     int loser;
+    int value;
 }
 pair;
 
@@ -89,7 +90,14 @@ int main(int argc, string argv[])
 
         printf("\n");
     }
-
+    for(int i=0;i<candidate_count;i++)
+    {
+        for(int j=0;j<candidate_count;j++)
+        {
+            printf("%d ",preferences[i][j]);
+        }
+        printf("\n");
+    }
 
     add_pairs();
     for (int i = 0; i < pair_count; i++)
@@ -99,6 +107,12 @@ int main(int argc, string argv[])
         
     }
     sort_pairs();
+    for (int i = 0; i < pair_count; i++)
+    {
+        printf("%d  %d",pairs[i].winner, pairs[i].loser);
+        printf("\n");
+        
+    }
     lock_pairs();
     print_winner();
     return 0;
@@ -148,12 +162,14 @@ void add_pairs(void)
             {
                 pairs[x].winner = i;
                 pairs[x].loser = j;
+                pairs[x].value = preferences[i][j] - preferences[j][i];
                 x++;
             }
             else if (preferences[i][j] < preferences[j][i])
             {
                 pairs[x].winner = j;
                 pairs[x].loser = i;
+                pairs[x].value = preferences[j][i] - preferences[i][j];
                 x++;
             }
         }
@@ -166,26 +182,26 @@ void add_pairs(void)
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
-    int temp1 = 0;
-    int temp2 = 0;
-    int a = 0, b = 0;
+    int temp1 = 0, temp2 = 0, temp3 = 0;
+    
+    
     for (int i = 0; i < pair_count - 1; i++)
     {
         for (int j = i + 1; j < pair_count; j++)
         {
-            a = preferences[pairs[i].winner][pairs[i].loser] - preferences[pairs[i].loser][pairs[i].winner];
-            b = preferences[pairs[j].winner][pairs[j].loser] - preferences[pairs[j].loser][pairs[j].winner];
-            if(a > b)
+            if (pairs[i].value > pairs[j].value)
             {
-                //swap
                 temp1 = pairs[i].winner;
                 temp2 = pairs[i].loser;
-
+                temp3 = pairs[i].value;
+                
                 pairs[i].winner = pairs[j].winner;
                 pairs[i].loser = pairs[j].loser;
-
+                pairs[i].value = pairs[j].value;
+                
                 pairs[j].winner = temp1;
                 pairs[j].loser = temp2;
+                pairs[j].value = temp3;
             }
         }
     }
