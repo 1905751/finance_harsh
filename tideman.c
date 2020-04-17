@@ -1,6 +1,7 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 // Max number of candidates
 #define MAX 9
@@ -28,6 +29,7 @@ int pair_count;
 int candidate_count;
 
 // Function prototypes
+int comp(const void *a, const void *b);
 bool vote(int rank, string name, int ranks[]);
 void record_preferences(int ranks[]);
 void add_pairs(void);
@@ -90,29 +92,9 @@ int main(int argc, string argv[])
 
         printf("\n");
     }
-    for(int i=0;i<candidate_count;i++)
-    {
-        for(int j=0;j<candidate_count;j++)
-        {
-            printf("%d ",preferences[i][j]);
-        }
-        printf("\n");
-    }
 
     add_pairs();
-    for (int i = 0; i < pair_count; i++)
-    {
-        printf("%d  %d",pairs[i].winner, pairs[i].loser);
-        printf("\n");
-        
-    }
     sort_pairs();
-    for (int i = 0; i < pair_count; i++)
-    {
-        printf("%d  %d",pairs[i].winner, pairs[i].loser);
-        printf("\n");
-        
-    }
     lock_pairs();
     print_winner();
     return 0;
@@ -179,34 +161,19 @@ void add_pairs(void)
     return;
 }
 
+int comp(const void *a, const void *b)
+{
+    pair *orderA = (pair *)a;
+    pair *orderB = (pair *)b;
+
+    // uses pointers to access the preferences and check how much a candidate wins over another
+    return (preferences[orderB->winner][orderB->loser] - preferences[orderA->winner][orderA->loser]);
+}
+
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
-    int temp1 = 0, temp2 = 0, temp3 = 0;
-    
-    
-    for (int i = 0; i < pair_count - 1; i++)
-    {
-        for (int j = i + 1; j < pair_count; j++)
-        {
-            if (pairs[i].value > pairs[j].value)
-            {
-                temp1 = pairs[i].winner;
-                temp2 = pairs[i].loser;
-                temp3 = pairs[i].value;
-                
-                pairs[i].winner = pairs[j].winner;
-                pairs[i].loser = pairs[j].loser;
-                pairs[i].value = pairs[j].value;
-                
-                pairs[j].winner = temp1;
-                pairs[j].loser = temp2;
-                pairs[j].value = temp3;
-            }
-        }
-    }
-    // TODO
-    return;
+    qsort(pairs, pair_count, sizeof(pair), comp);
 }
 
 // Lock pairs into the candidate graph in order, without creating cycles
