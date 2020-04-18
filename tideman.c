@@ -94,7 +94,7 @@ int main(int argc, string argv[])
 
         printf("\n");
     }
-    
+
     add_pairs();
     sort_pairs();
     lock_pairs();
@@ -107,7 +107,7 @@ bool vote(int rank, string name, int ranks[])
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (strcmp(name,candidates[i]) == 0)
+        if (strcmp(name, candidates[i]) == 0)
         {
             ranks[rank] = i;
             return true;
@@ -223,7 +223,7 @@ void validateLock(int j)
 
 void lock_pairs(void)
 {
-   for (int i = 0; i < pair_count; i++)
+    for (int i = 0; i < pair_count; i++)
     {
         locked[pairs[i].winner][pairs[i].loser] = true;
 
