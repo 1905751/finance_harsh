@@ -240,25 +240,47 @@ void lock_pairs(void)
 // Print the winner of the election
 void print_winner(void)
 {
-    int winner;
-    int rank;
-
+    int x = 0, y = 0;
     for (int i = 0; i < candidate_count; i++)
     {
-        rank = 0;
-        for (int k = 0; k < candidate_count; k++)
+        for (int j = 0; j < candidate_count; j++)
         {
-            if (locked[k][i] == false)
+            if (locked[i][j] == true)
             {
-                rank++;
+                x++;
+            }
+        }
+        if (x == 2)
+        {
+            printf("%s",candidates[i]);
+            y++;
+        }
+        x = 0;
+    }
+
+    if(y == 0)
+    {
+        for(int i = 0; i < candidate_count; i++)
+        {
+            for(int j = i + 1; j < candidate_count; j++)
+            {
+                if (x != (pair_count - 1))
+                {
+                    locked[pairs[x].winner][pairs[x].loser] = true;
+                    locked[pairs[x].loser][pairs[x].winner] = false;
+                    x++;
+                }
+                else
+                {
+                    locked[pairs[x].winner][pairs[x].loser] = true;
+                    locked[pairs[x].loser][pairs[x].winner] = true;
+                }
             }
         }
 
-        // Prints all the names that are the source of the graph
-        if (rank == candidate_count)
-        {
-            printf("%s\n", candidates[i]);
-        }
+        print_winner();
     }
+    // TODO
+    return;
 }
 
