@@ -8,7 +8,6 @@
 
 // preferences[i][j] is number of voters who prefer i over j
 int preferences[MAX][MAX];
-bool lock = true;
 
 // locked[i][j] means i is locked in over j
 bool locked[MAX][MAX];
@@ -30,7 +29,7 @@ int pair_count;
 int candidate_count;
 
 // Function prototypes
-void validateLock(int j);
+void cycle(void);
 int comp(const void *a, const void *b);
 bool vote(int rank, string name, int ranks[]);
 void record_preferences(int ranks[]);
@@ -107,7 +106,7 @@ bool vote(int rank, string name, int ranks[])
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (strcmp(name, candidates[i]) == 0)
+        if (strcmp(name,candidates[i]) == 0)
         {
             ranks[rank] = i;
             return true;
@@ -177,64 +176,39 @@ void sort_pairs(void)
     qsort(pairs, pair_count, sizeof(pair), comp);
 }
 
-void validateLock(int j)
+void cycle(void)
 {
-    if (j == 0)
+    int x = 0, y = 0;
+    for (int i = 0; i < candidate_count; i++)
     {
-        return;
-    }
-
-    int r = 0;
-    bool rank[j];
-    for (int i = 0; i < j; i++)
-    {
-        rank[i] = false;
-    }
-
-    // checks all the submatrixes up to a single square using recursion
-    validateLock(j - 1);
-
-    for (int i = 0; i < j; i++)
-    {
-        for (int k = 0; k < j; k++)
+        for(int j = 0; j < candidate_count; j++)
         {
-            if (locked[i][k] == true)
+            if(locked[i][j] == false)
             {
-                rank[i] = true;
+                x++;
             }
         }
-    }
-
-    for (int i = 0; i < j; i++)
-    {
-        if (rank[i] == true)
+        if(x == candidate_count - 1)
         {
-            r++;
+            y++;
         }
+        x = 0;
     }
-
-    // if the rank is max the lock is canceled
-    if (r == j)
+    if(y == candidate_count)
     {
-        lock = false;
+        pairs[pair_count].winner = false;
     }
 }
 
 
 void lock_pairs(void)
 {
-    for (int i = 0; i < pair_count; i++)
+   for (int i = 0; i < pair_count; i++)
     {
         locked[pairs[i].winner][pairs[i].loser] = true;
 
-        validateLock(candidate_count);
-        // if the validateLock function found a cycle we reverse the lock
-        if (!lock)
-        {
-            locked[pairs[i].winner][pairs[i].loser] = false;
-        }
-        lock = true;
     }
+    cycle();
 }
 
 // Print the winner of the election
@@ -261,4 +235,3 @@ void print_winner(void)
         }
     }
 }
-
