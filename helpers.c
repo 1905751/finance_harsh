@@ -85,14 +85,15 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    float sumg =0.00, sumb = 0.00, sumr = 0.00, x = 0.00;
+    int sumg, sumb, sumr;
+    float x;
     for (int i = 0; i < height; i++)
     {
 	    for (int j = 0; j < width; j++)
 	    {
-	            sumg = 0.00;
-                sumb = 0.00;
-                sumr = 0.00;
+	            sumg = 0;
+                sumb = 0;
+                sumr = 0;
                 x = 0.00;
 
 
