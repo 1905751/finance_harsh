@@ -48,6 +48,7 @@ bool check(const char *word)
         }
         cursor = cursor->next;
     }
+    free(cursor);
     return false;
 }
 
@@ -96,6 +97,7 @@ bool load(const char *dictionary)
             new_node->next = table[n];
             table[n] = new_node;
         }
+        free(new_node);
     }
     // close dictionary
     fclose(dicptr);
