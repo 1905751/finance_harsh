@@ -120,6 +120,7 @@ unsigned int size(void)
             counter++;
             cursor = cursor->next;
         }
+        free(cursor);
     }
     return counter;
 }
