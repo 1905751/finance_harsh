@@ -140,8 +140,9 @@ bool unload(void)
             node *temp = cursor;
             cursor = cursor->next;
             free(temp);
+            free(cursor);
         }
-        free(cursor);
+
     }
     return true;
 }
