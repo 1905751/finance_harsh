@@ -66,35 +66,41 @@ unsigned int hash(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-    // TODO
-    FILE *file = fopen(dictionary, "r");
-    if (file == NULL)
+     // initialise word
+    char word[LENGTH+1];
+
+    // open dictionary
+    FILE *dicptr = fopen(dictionary, "r");
+
+    // iterate through dictionary words
+    while (fscanf(dicptr, "%s", word) != EOF)
     {
-        return false;
-    }
-    char word[LENGTH + 1];
-    while (fscanf(file, "%s", word) != EOF)
-    {
-        node *n = malloc(sizeof(node));
-        if (n == NULL)
+        // make a new word.
+        node *new_node = malloc(sizeof(node));
+
+        // check for error assigning memory
+        if (new_node == NULL)
         {
+            unload();
             return false;
-        }
-        strcpy(n->word, word);
-        int index = hash(word);
-        if (table[index] == NULL)
-        {
-            table[index] = n;
-            n->next = NULL;
         }
         else
         {
-            n->next = table[index];
-            table[index] = n;
+            // copy word into node
+            strcpy(new_node->word, word);
+
+            // use hash function to determine which bucket (linked list) to insert word into
+            int n = hash(new_node->word);
+
+            // insert into list
+            new_node->next = table[n];
+            table[n] = new_node;
         }
     }
-    fclose(file);
-    return false;
+    // close dictionary
+    fclose(dicptr);
+
+    return true;
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
