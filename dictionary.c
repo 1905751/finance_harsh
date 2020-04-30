@@ -31,7 +31,7 @@ bool check(const char *word)
     // convert word to lowercase and store it in word_copy
     for (int i = 0; i < len; i++)
     {
-       word_copy[i] = tolower(word[i]);
+        word_copy[i] = tolower(word[i]);
     }
 
     // add null terminator to end of char array
@@ -41,7 +41,7 @@ bool check(const char *word)
     int h = hash(word_copy);
 
     // assign cursor node to the first node of the bucket
-    node* cursor = table[h];
+    node *cursor = table[h];
 
     // check until the end of the linked list
     while (cursor != NULL)
@@ -75,8 +75,8 @@ unsigned int hash(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-     // initialise word
-    char word[LENGTH+2];
+    // initialise word
+    char word[LENGTH + 2];
 
     // open dictionary
     FILE *dicptr = fopen(dictionary, "r");
@@ -137,7 +137,7 @@ unsigned int size(void)
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-     for (int i = 0; i < HASHTABLE_SIZE; i++)
+    for (int i = 0; i < HASHTABLE_SIZE; i++)
     {
         // set pointer to head of list
         node *cursor = table[i];
