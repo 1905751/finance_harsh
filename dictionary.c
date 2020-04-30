@@ -11,7 +11,7 @@
 // Represents a node in a hash table
 typedef struct node
 {
-    char word[LENGTH + 1];
+    char word[LENGTH + 2];
     struct node *next;
 }
 node;
@@ -26,7 +26,7 @@ node *table[HASHTABLE_SIZE];
 bool check(const char *word)
 {
     // initialise lower case word
-    char lcword[LENGTH+1];
+    char lcword[LENGTH+2];
 
     // convert to lowercase, as we need this to lookup. TODO: change from length to length of word
     for (int i = 0; i < LENGTH; i++)
@@ -68,7 +68,7 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
      // initialise word
-    char word[LENGTH+1];
+    char word[LENGTH+2];
 
     // open dictionary
     FILE *dicptr = fopen(dictionary, "r");
