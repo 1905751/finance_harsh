@@ -33,6 +33,7 @@ bool check(const char *word)
     {
         lcword[i] = tolower(word[i]);
     }
+    lcword[LENGTH + 1] = '\0';
 
     // set cursor to start of appropriate lined list
     node *cursor = table[hash(lcword)];
