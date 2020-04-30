@@ -25,31 +25,38 @@ node *table[HASHTABLE_SIZE];
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // initialise lower case word
-    char lcword[LENGTH+2];
+    int len = strlen(word);
+    char word_copy[len + 1];
 
-    // convert to lowercase, as we need this to lookup. TODO: change from length to length of word
-    for (int i = 0; i < LENGTH + 1; i++)
+    // convert word to lowercase and store it in word_copy
+    for (int i = 0; i < len; i++)
     {
-        lcword[i] = tolower(word[i]);
+       word_copy[i] = tolower(word[i]);
     }
-    lcword[LENGTH + 1] = '\0';
 
-    // set cursor to start of appropriate lined list
-    node *cursor = table[hash(lcword)];
+    // add null terminator to end of char array
+    word_copy[len] = '\0';
 
+    // get hash value (a.k.a. bucket)
+    int h = hash(word_copy);
 
-    // traverse list
+    // assign cursor node to the first node of the bucket
+    node* cursor = table[h];
+
+    // check until the end of the linked list
     while (cursor != NULL)
     {
-        // check node's word to see if it is target word, ignoring case
-        if (strcasecmp(word, cursor->word) == 0)
+        if (strcmp(cursor->word, word_copy) == 0)
         {
+            // word is in dictionary
             return true;
         }
-        cursor = cursor->next;
+        else
+        {
+            // check next node
+            cursor = cursor->next;
+        }
     }
-    free(cursor);
     return false;
 }
 
