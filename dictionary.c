@@ -49,6 +49,7 @@ bool check(const char *word)
         cursor = cursor->next;
     }
     free(cursor);
+    free(table);
     return false;
 }
 
