@@ -5,12 +5,18 @@ while True:
     if x >= 1 and x <= 8:
         break
 for i in range(x):
-    for j in range(x + 3 + i):
-        if j == x + 1:
+    for j in range(x + 2 + i):
+        if j == x:
             print(" ", end="")
-        elif j >= x - i:
+        elif j >= x - 1 - i:
             print("#", end="")
         else:
             print(" ", end="")
     print()
 
+     # #
+    ## ##
+   ### ###
+  #### ####
+ ##### #####
+###### ######
