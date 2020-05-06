@@ -7,16 +7,9 @@ while True:
 for i in range(x):
     for j in range(x + 2 + i):
         if j == x:
-            print(" ", end="")
+            print("  ", end="")
         elif j >= x - 1 - i:
             print("#", end="")
         else:
             print(" ", end="")
     print()
-
-     # #
-    ## ##
-   ### ###
-  #### ####
- ##### #####
-###### ######
