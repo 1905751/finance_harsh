@@ -1,9 +1,9 @@
-# taking input
-x = int(input("enter the height of pyramid :"))
-# checking condition
-while x < 1 or x > 8:
-    x = int(input("enter the height of pyramid :"))
-# printing loop
+from cs50 import get_int
+
+while True:
+    x = get_int("Height: ")
+    if x >= 1 and x <= 8:
+        break
 for i in range(x):
     for j in range(x + 3 + i):
         if j == x + 1:
@@ -13,3 +13,4 @@ for i in range(x):
         else:
             print(" ", end="")
     print()
+
