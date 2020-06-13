@@ -6,14 +6,14 @@ from sys import argv
 if len(argv) != 3:
     print("usage error, dna.py sequence.txt database.csv")
     exit()
-#reading keys for database
+# reading keys for database
 with open(argv[1]) as info_files:
     info = csv.reader(info_files)
 
     for row in info:
         key = row
         break
-#removing 1st row
+# removing 1st row
 key.pop(0)
 
 # reading the dna sequence
@@ -21,7 +21,7 @@ with open(argv[2]) as dna_file:
     read = csv.reader(dna_file)
 
     for line in read:
-        seq  = line[0]
+        seq = line[0]
 # loop for counting
 i = 0
 while i < len(key):
@@ -31,7 +31,7 @@ while i < len(key):
 
     while j < len(seq):
         # taking sub string
-        sub = seq[j : j + len(key[i])]
+        sub = seq[j: j + len(key[i])]
         if sub == key[i]:
             counter += 1
             j += len(key[i])
@@ -60,9 +60,9 @@ with open(argv[1]) as people_info:
 
             i += 1
         if match == len(key):
-                nm += 1
-                print(p[0])
-                break
+            nm += 1
+            print(p[0])
+            break
 # condition if no match found
 if nm == 0:
     print("no match")
